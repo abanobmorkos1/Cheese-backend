@@ -39,9 +39,9 @@ const Cheese = mongoose.model('cheese', cheeseSchema)
 
 // SHOW ROUTE
 app.get('/cheese', async (req, res) => {
-    try{
+    try{  
         res.json(await Cheese.find({}))
-
+        
     } catch (error) {
         res.status(400).json(error)
     }
@@ -52,6 +52,14 @@ app.post('/cheese' , async (req , res) => {
     try {
         res.json(await Cheese.create(req.body))
         
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+app.get('/cheese/:id', async (req, res) => {
+    try{  
+        res.json(await Cheese.findById(req.params.id));
+
     } catch (error) {
         res.status(400).json(error)
     }
@@ -79,7 +87,6 @@ app.delete('/cheese/:id', async (req, res) => {
 })
 
 // LISTNER 
-
 app.listen(PORT , () => console.log(`listening on port ${PORT}`))
 
 
